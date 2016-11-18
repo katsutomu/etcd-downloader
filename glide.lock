@@ -1,5 +1,5 @@
-hash: c481a135737e4b85fe606fa7be1d16fea4cccfda2cfa4b4eb6fd4158ef80244c
-updated: 2016-11-19T02:08:14.173958823+09:00
+hash: 9626ec06281f89758bc487e878187676607ea60ffc921a8993bde0cdecd5acb9
+updated: 2016-11-19T03:15:00.305359758+09:00
 imports:
 - name: github.com/armon/consul-api
   version: dcfedd50ed5334f96adee43fc88518a4f095e15c
@@ -9,6 +9,10 @@ imports:
   - etcd
 - name: github.com/fsnotify/fsnotify
   version: fd9ec7deca8bf46ecd2a795baaacf2b3a9be1197
+- name: github.com/golang/mock
+  version: bd3c8e81be01eef76d4b503f5e687d2d1354d2d9
+  subpackages:
+  - gomock
 - name: github.com/hashicorp/hcl
   version: c3e054bfd4dcf77b9965ed2b79b22afa2f41d4eb
   subpackages:

@@ -3,3 +3,6 @@ import:
 - package: github.com/spf13/viper
   subpackages:
   - '...'
+- package: github.com/golang/mock
+  subpackages:
+  - gomock
