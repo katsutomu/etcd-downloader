@@ -38,3 +38,34 @@ func TestShouldGetRemoteReaderReturnErrorOnGetAllError(t *testing.T) {
 		t.Errorf("エラーが返却されなかった:%s", err)
 	}
 }
+
+func TestMarshalToml(t *testing.T) {
+	var m = map[string]interface{}{
+		"database": map[string]string{
+			"key1": "val1",
+			"key2": "val2",
+		},
+	}
+	_, err := marshal("toml", m)
+	if err != nil {
+		t.Error("error:", err)
+	}
+}
+
+func TestMarshalJson(t *testing.T) {
+	var m = map[string]interface{}{
+		"database": map[string]string{
+			"key1": "val1",
+			"key2": "val2",
+		},
+	}
+	expect := `{"database":{"key1":"val1","key2":"val2"}}`
+	b, err := marshal("json", m)
+	actual := string(b)
+	if err != nil {
+		t.Error("error:", err)
+	}
+	if expect != actual {
+		t.Error(expect + "\n" + actual)
+	}
+}
