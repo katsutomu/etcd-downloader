@@ -14,8 +14,20 @@ func init() {
 }
 
 // GetRemoteReader
-func GetRemoteReader(provider, endpoint, dir, ext string) ([]byte, error) {
-	config, err := remoteReader.GetAll(provider, endpoint, dir, ext)
+func ReadRemoteConfig(provider, endpoint, dir, ext string) ([]byte, error) {
+	config, err := remoteReader.Get(provider, endpoint, dir, ext)
+	if err != nil {
+		return nil, err
+	}
+	s, err := json.Marshal(config)
+	if err != nil {
+		return nil, err
+	}
+	return []byte(s), nil
+}
+
+func ReadRemoteSecureConfig(provider, endpoint, dir, key, ext string) ([]byte, error) {
+	config, err := remoteReader.GetSecure(provider, endpoint, dir, key, ext)
 	if err != nil {
 		return nil, err
 	}
@@ -27,14 +39,25 @@ func GetRemoteReader(provider, endpoint, dir, ext string) ([]byte, error) {
 }
 
 type RemoteReader interface {
-	GetAll(provider, endpoint, dir, ext string) (map[string]interface{}, error)
+	Get(provider, endpoint, dir, ext string) (map[string]interface{}, error)
+	GetSecure(provider, endpoint, dir, key, ext string) (map[string]interface{}, error)
 }
 
 type etcdReader struct{}
 
-func (r etcdReader) GetAll(provider, endpoint, dir, ext string) (map[string]interface{}, error) {
+func (r etcdReader) Get(provider, endpoint, dir, ext string) (map[string]interface{}, error) {
 	v := viper.New()
 	v.AddRemoteProvider(provider, endpoint, dir)
+	v.SetConfigType(ext)
+	if err := v.ReadRemoteConfig(); err != nil {
+		return nil, err
+	}
+	return v.AllSettings(), nil
+}
+
+func (r etcdReader) GetSecure(provider, endpoint, dir, key, ext string) (map[string]interface{}, error) {
+	v := viper.New()
+	v.AddSecureRemoteProvider(provider, endpoint, dir, key)
 	v.SetConfigType(ext)
 	if err := v.ReadRemoteConfig(); err != nil {
 		return nil, err

@@ -28,13 +28,24 @@ func (_m *MockRemoteReader) EXPECT() *_MockRemoteReaderRecorder {
 	return _m.recorder
 }
 
-func (_m *MockRemoteReader) GetAll(_param0 string, _param1 string, _param2 string, _param3 string) (map[string]interface{}, error) {
-	ret := _m.ctrl.Call(_m, "GetAll", _param0, _param1, _param2, _param3)
+func (_m *MockRemoteReader) Get(_param0 string, _param1 string, _param2 string, _param3 string) (map[string]interface{}, error) {
+	ret := _m.ctrl.Call(_m, "Get", _param0, _param1, _param2, _param3)
 	ret0, _ := ret[0].(map[string]interface{})
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-func (_mr *_MockRemoteReaderRecorder) GetAll(arg0, arg1, arg2, arg3 interface{}) *gomock.Call {
-	return _mr.mock.ctrl.RecordCall(_mr.mock, "GetAll", arg0, arg1, arg2, arg3)
+func (_mr *_MockRemoteReaderRecorder) Get(arg0, arg1, arg2, arg3 interface{}) *gomock.Call {
+	return _mr.mock.ctrl.RecordCall(_mr.mock, "Get", arg0, arg1, arg2, arg3)
+}
+
+func (_m *MockRemoteReader) GetSecure(_param0 string, _param1 string, _param2 string, _param3 string, _param4 string) (map[string]interface{}, error) {
+	ret := _m.ctrl.Call(_m, "GetSecure", _param0, _param1, _param2, _param3, _param4)
+	ret0, _ := ret[0].(map[string]interface{})
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+func (_mr *_MockRemoteReaderRecorder) GetSecure(arg0, arg1, arg2, arg3, arg4 interface{}) *gomock.Call {
+	return _mr.mock.ctrl.RecordCall(_mr.mock, "GetSecure", arg0, arg1, arg2, arg3, arg4)
 }

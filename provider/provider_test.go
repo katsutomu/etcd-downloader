@@ -15,10 +15,10 @@ func TestGetRemoteReader(t *testing.T) {
 	mock := mock_provider.NewMockRemoteReader(ctrl)
 	m := make(map[string]interface{})
 	m["hoge"] = 1
-	mock.EXPECT().GetAll("etcd", "hogehoge.com", "endpoint", "json").Return(m, nil)
+	mock.EXPECT().Get("etcd", "hogehoge.com", "endpoint", "json").Return(m, nil)
 	remoteReader = mock
 
-	b, err := GetRemoteReader("etcd", "hogehoge.com", "endpoint", "json")
+	b, err := ReadRemoteConfig("etcd", "hogehoge.com", "endpoint", "json")
 	if err != nil {
 		t.Errorf("エラーが返却:%s", err)
 		return
@@ -31,9 +31,9 @@ func TestShouldGetRemoteReaderReturnErrorOnGetAllError(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
 	mock := mock_provider.NewMockRemoteReader(ctrl)
-	mock.EXPECT().GetAll("etcd", "hogehoge.com", "endpoint", "json").Return(nil, fmt.Errorf("test"))
+	mock.EXPECT().Get("etcd", "hogehoge.com", "endpoint", "json").Return(nil, fmt.Errorf("test"))
 	remoteReader = mock
-	_, err := GetRemoteReader("etcd", "hogehoge.com", "endpoint", "json")
+	_, err := ReadRemoteConfig("etcd", "hogehoge.com", "endpoint", "json")
 	if err == nil {
 		t.Errorf("エラーが返却されなかった:%s", err)
 	}
