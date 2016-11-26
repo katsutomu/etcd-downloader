@@ -1,9 +1,9 @@
 package main
 
 import (
-	"etcd-downloader/locater"
-	"etcd-downloader/provider"
 	"flag"
+	"gonfigloader/locater"
+	"gonfigloader/provider"
 
 	"github.com/labstack/gommon/log"
 )

@@ -1,8 +1,8 @@
 package provider
 
 import (
-	"etcd-downloader/mock"
 	"fmt"
+	"gonfigloader/mock"
 	"testing"
 
 	"github.com/golang/mock/gomock"
