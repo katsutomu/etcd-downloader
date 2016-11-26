@@ -2,10 +2,7 @@ package main
 
 import (
 	"flag"
-	"gonfigloader/locater"
-	"gonfigloader/provider"
-
-	"github.com/labstack/gommon/log"
+	"gonfigloader"
 )
 
 var endpoint string
@@ -24,12 +21,5 @@ func init() {
 
 func main() {
 	flag.Parse()
-	b, err := provider.ReadRemoteConfig("etcd", endpoint, dir, ext)
-	if err != nil {
-		log.Error(err)
-		return
-	}
-	if err := locater.LocateFile(outpath, outfile, b); err != nil {
-		log.Error(err)
-	}
+	gonfigloader.Download(endpoint, dir, ext, outpath, outfile)
 }
