@@ -1,8 +1,8 @@
 package gonfigloader
 
 import (
-	"gonfigloader/locater"
-	"gonfigloader/provider"
+	"github.com/katsutomu/gonfigloader/locater"
+	"github.com/katsutomu/gonfigloader/provider"
 
 	"github.com/labstack/gommon/log"
 )

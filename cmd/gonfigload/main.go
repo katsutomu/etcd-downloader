@@ -2,7 +2,8 @@ package main
 
 import (
 	"flag"
-	"gonfigloader"
+
+	"github.com/katsutomu/gonfigloader"
 )
 
 var endpoint string
